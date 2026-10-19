@@ -163,8 +163,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug OIDC
-        uses: github/actions-oidc-debugger@main
+      - name: Print GitHub Context
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Ref: $GITHUB_REF"
+          echo "Actor: $GITHUB_ACTOR"
+
+      - name: Get OIDC Token
+        uses: actions/github-script@v7
+        with:
+        script: |
+          const token = await core.getIDToken();
+          console.log("OIDC token received");
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
