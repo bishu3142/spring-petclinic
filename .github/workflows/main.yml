@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: petclinic
-          path: target/*.war
+          path: target/*.jar
 
       - name: Slack Notification Success
         if: success()
