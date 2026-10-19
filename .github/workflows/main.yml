@@ -172,9 +172,9 @@ jobs:
       - name: Get OIDC Token
         uses: actions/github-script@v7
         with:
-        script: |
-          const token = await core.getIDToken();
-          console.log("OIDC token received");
+          script: |
+            const token = await core.getIDToken();
+            console.log("OIDC token received");
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6.3.0
