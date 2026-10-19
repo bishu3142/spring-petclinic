@@ -176,7 +176,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run:
-          docker build -f Docker-files/app/multistage/Dockerfile -t .
+          docker build -f -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
       - name: run trivy scan on docker image
         uses: aquasecurity/trivy-action@v0.36.0
