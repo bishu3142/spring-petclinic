@@ -11,6 +11,7 @@ services:
       - MYSQL_DATABASE=petclinic
     volumes:
       - "./conf.d:/etc/mysql/conf.d:ro"
+      
   postgres:
     image: postgres:18.4
     ports:
