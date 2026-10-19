@@ -1,0 +1,56 @@
+name:
+  petclinic-ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - run: java -version
+
+      - name: Run Tests on Branch
+        run: mvn install
+
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: petclinic
+          path: target/*.war
+
+      - name: Slack Notification Success
+        if: success()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"✅ Build Success: '${{ github.repository }}' - '${{ github.run_number }}'"}' \
+          ${{ vars.SLACK_WEBHOOK_URL }}
+
+
+      - name: Slack Notification Failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"❌ Build Failed: '${{ github.repository }}' - '${{ github.run_number }}'"}' \
+          ${{ vars.SLACK_WEBHOOK_URL }}
