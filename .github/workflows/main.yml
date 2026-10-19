@@ -204,13 +204,13 @@ jobs:
         run:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
+
       - name: Slack Notification Success
           if: success()
           run: |
             curl -X POST -H 'Content-type: application/json' \
             --data '{"text":"✅ Build-Publish-ECR Success: '${{ github.repository }}' - '${{ github.run_number }}'"}' \
             ${{ vars.SLACK_WEBHOOK_URL }}
-
 
       - name: Slack Notification Failure
         if: failure()
