@@ -29,7 +29,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-      - run: java --version
 
       - name: Run Tests on Branch
         run: mvn install
