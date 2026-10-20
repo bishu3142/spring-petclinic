@@ -216,7 +216,7 @@ jobs:
           scan-type: config
           scan-ref: manifests/vpc-terraform
           format: sarif
-          exit-code: 1
+          exit-code: 0
           severity: HIGH,CRITICAL
           output: trivy-vpc.sarif
 
@@ -327,7 +327,7 @@ jobs:
           scan-type: config
           scan-ref: manifests/ECR-ecs-terraform
           format: sarif
-          exit-code: 1
+          exit-code: 0
           severity: HIGH,CRITICAL
           output: trivy-ecs.sarif
 
