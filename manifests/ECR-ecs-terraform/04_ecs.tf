@@ -72,6 +72,7 @@ resource "aws_security_group" "alb" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
   description = "load balancer security group"
   ingress {
+    description = "Allow HTTP traffic from internet"
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
@@ -86,6 +87,7 @@ resource "aws_security_group" "ecs" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
   description = "ECS security Group"
   ingress {
+    description = "Allow HTTP traffic from internet"
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
