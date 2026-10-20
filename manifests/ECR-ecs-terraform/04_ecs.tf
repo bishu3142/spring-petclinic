@@ -122,7 +122,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_ecs_service" "app" {
-  name            = "petclinic"
+  name            = "petclinic-service"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.app.arn
 
