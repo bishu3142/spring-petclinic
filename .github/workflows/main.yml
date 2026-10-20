@@ -160,6 +160,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      security-events: write
+      actions: read
     steps:
       - name: checkout code
         uses: actions/checkout@v5
@@ -267,6 +269,8 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      security-events: write
+      actions: read
     steps:
       - name: checkout code
         uses: actions/checkout@v5
