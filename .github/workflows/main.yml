@@ -428,14 +428,14 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: gitops-container
+          container-name: petclinic-con
           image: ${{ steps.upload-image.outputs.image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: gitops-task-service-fpq7ffq5
+          service: petclinic-service
           cluster: gitops-cluster
           wait-for-service-stability: true
 
