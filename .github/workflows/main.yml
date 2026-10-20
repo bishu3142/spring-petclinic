@@ -152,7 +152,7 @@ jobs:
 
 
   Deploy-VPC-Terraform:
-    name: deploy VPC and ECS Terraform
+    name: deploy VPC Terraform
     runs-on: ubuntu-latest
     defaults:
       run:

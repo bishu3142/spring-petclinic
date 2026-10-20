@@ -68,8 +68,8 @@ resource "aws_ecs_task_definition" "app" {
 
 #Load Balancer SG
 resource "aws_security_group" "alb" {
-  name   = "alb-sg"
-  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  name        = "alb-sg"
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
   description = "load balancer security group"
   ingress {
     from_port   = 8080
@@ -82,8 +82,8 @@ resource "aws_security_group" "alb" {
 # ECS Task SG
 
 resource "aws_security_group" "ecs" {
-  name   = "ecs-sg"
-  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  name        = "ecs-sg"
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
   description = "ECS security Group"
   ingress {
     from_port       = 8080
@@ -94,9 +94,9 @@ resource "aws_security_group" "ecs" {
 }
 
 resource "aws_lb" "main" {
-  name               = "petclinic-alb"
-  internal           = false
-  load_balancer_type = "application"
+  name                       = "petclinic-alb"
+  internal                   = false
+  load_balancer_type         = "application"
   drop_invalid_header_fields = true
 
   security_groups = [
