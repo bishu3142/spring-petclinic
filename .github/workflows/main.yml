@@ -214,21 +214,23 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: config
-          scan-ref: terraform
+          scan-ref: manifests/vpc-terraform
           format: sarif
-          output: trivy-iac.sarif
+          exit-code: 1
+          severity: HIGH,CRITICAL
+          output: trivy-vpc.sarif
 
       - name: Upload trivvy Scan Results
         uses: actions/upload-artifact@v4
         with:
-          name: trivvy-report
-          path: trivy-iac.sarif
+          name: trivvy-vpc-report
+          path: trivy-vpc.sarif
           retention-days: 30
 
       - name: Upload Trivy Results
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: trivy-iac.sarif
+          sarif_file: trivy-vpc.sarif
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
@@ -323,21 +325,23 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: config
-          scan-ref: terraform
+          scan-ref: manifests/ECR-ecs-terraform
           format: sarif
-          output: trivy-iac.sarif
+          exit-code: 1
+          severity: HIGH,CRITICAL
+          output: trivy-ecs.sarif
 
       - name: Upload trivvy Scan Results
         uses: actions/upload-artifact@v4
         with:
-          name: trivvy-report
-          path: trivy-iac.sarif
+          name: trivvy-ecs-report
+          path: trivy-ecs.sarif
           retention-days: 30
 
       - name: Upload Trivy Results
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: trivy-iac.sarif
+          sarif_file: trivy-ecs.sarif
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
