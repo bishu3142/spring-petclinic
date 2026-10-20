@@ -23,7 +23,7 @@
             "systemControls": []
         }
     ],
-    "family": "gitops-task",
+    "family": "petclinic",
     "executionRoleArn": "arn:aws:iam::942548380966:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
