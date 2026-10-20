@@ -9,6 +9,12 @@ resource "aws_ecr_repository" "devops-ecr" {
 
 resource "aws_ecs_cluster" "main" {
   name = "gitops-cluster"
+
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
+
 }
 
 resource "aws_iam_role" "ecs_task_execution_role" {
@@ -46,7 +52,8 @@ resource "aws_ecs_task_definition" "app" {
       name  = "petclinic-con"
       image = "${aws_ecr_repository.devops-ecr.repository_url}:latest"
 
-      essential = true
+      essential              = true
+      readonlyRootFilesystem = true
 
       portMappings = [
         {
@@ -63,6 +70,7 @@ resource "aws_ecs_task_definition" "app" {
 resource "aws_security_group" "alb" {
   name   = "alb-sg"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  description = "load balancer security group"
   ingress {
     from_port   = 8080
     to_port     = 8080
@@ -76,6 +84,7 @@ resource "aws_security_group" "alb" {
 resource "aws_security_group" "ecs" {
   name   = "ecs-sg"
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+  description = "ECS security Group"
   ingress {
     from_port       = 8080
     to_port         = 8080
@@ -88,6 +97,7 @@ resource "aws_lb" "main" {
   name               = "petclinic-alb"
   internal           = false
   load_balancer_type = "application"
+  drop_invalid_header_fields = true
 
   security_groups = [
     aws_security_group.alb.id
