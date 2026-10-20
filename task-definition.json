@@ -1,9 +1,9 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:942548380966:task-definition/gitops-task:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:942548380966:task-definition/petclinic:5",
     "containerDefinitions": [
         {
-            "name": "gitops-container",
-            "image": "942548380966.dkr.ecr.us-east-1.amazonaws.com/gitops-ci@sha256:219c7b8766e7c6fdc145931382e43474b80761152b032dddf218b427ac2b3a6f",
+            "name": "petclinic-con",
+            "image": "942548380966.dkr.ecr.us-east-1.amazonaws.com/devops-ecr@sha256:219c7b8766e7c6fdc145931382e43474b80761152b032dddf218b427ac2b3a6f",
             "cpu": 0,
             "portMappings": [
                 {
